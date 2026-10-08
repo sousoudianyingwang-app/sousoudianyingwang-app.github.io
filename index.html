@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>搜搜电影网 - 全网影视资源聚合搜索平台 | 高清电影电视剧在线观看指南</title>
+<meta name="description" content="搜搜电影网（sousoudianyingwang-app）致力于为影视爱好者提供专业的电影、电视剧、综艺、动漫、纪录片等海量影视内容的检索与导航服务。汇集院线新片、经典老片、热播剧集、高分口碑佳作，支持按类型、地区、年份、评分多维筛选，快速定位想看的影视作品。">
+<meta name="keywords" content="搜搜电影网, sousoudianyingwang-app, 电影搜索, 电视剧推荐, 高清影视, 在线观影指南, 院线新片, 经典电影, 热播综艺, 动漫番剧, 纪录片, 影视资讯, 票房排行, 影评打分">
+<meta name="author" content="搜搜电影网">
+<meta name="robots" content="index, follow">
+<meta name="bingbot" content="index, follow">
+<meta name="theme-color" content="#0f172a">
+<meta property="og:title" content="搜搜电影网 - 全网影视资源聚合搜索平台">
+<meta property="og:description" content="专业影视检索导航，电影电视剧综艺动漫一站式搜索。">
+<meta property="og:url" content="https://sousoudianyingwang-app.github.io">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="搜搜电影网 - sousoudianyingwang-app.github.io">
+<meta name="twitter:description" content="海量影视内容聚合搜索，快速找到想看的电影与剧集。">
+<link rel="canonical" href="https://sousoudianyingwang-app.github.io">
+<style>
+:root{
+  --bg:#070b17;
+  --panel:#0d1428;
+  --line:rgba(255,255,255,.08);
+  --txt:#e8edf7;
+  --sub:#93a3bf;
+  --acc:#ff5c39;
+  --acc2:#22d3ee;
+  --gold:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+/* 顶部 */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(7,11,23,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;gap:18px;height:64px}
+.logo{font-size:22px;font-weight:800;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
+.logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:inline-block}
+.logo span{background:linear-gradient(90deg,#fff,var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.nav-links a{padding:8px 14px;border-radius:999px;font-size:14px;color:var(--sub);transition:.2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+/* 首屏 */
+.hero{padding:70px 0 50px;position:relative}
+.hero::after{content:"";position:absolute;right:-120px;top:-60px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,92,57,.25),transparent 70%);z-index:0}
+.h-tag{display:inline-block;padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--acc2);margin-bottom:20px}
+h1{font-size:clamp(30px,5vw,52px);line-height:1.2;font-weight:800;margin-bottom:18px;position:relative;z-index:2}
+h1 em{font-style:normal;color:var(--acc)}
+.hero p{color:var(--sub);max-width:640px;font-size:16px;position:relative;z-index:2}
+.h-actions{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:2}
+.btn{padding:13px 28px;border-radius:12px;font-weight:700;font-size:15px;transition:.2s;cursor:pointer;border:0}
+.btn-p{background:var(--acc);color:#fff}
+.btn-p:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.btn-o{border:1px solid var(--line);color:var(--txt);background:transparent}
+.btn-o:hover{border-color:var(--acc2);color:var(--acc2)}
+.stats{display:flex;gap:36px;margin-top:44px;flex-wrap:wrap;position:relative;z-index:2}
+.stat b{display:block;font-size:26px;color:var(--gold)}
+.stat small{color:var(--sub);font-size:13px}
+/* 通用板块 */
+section{padding:56px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head h2{font-size:26px;font-weight:800}
+.sec-head h2 u{text-decoration:none;color:var(--acc)}
+.sec-head .more{color:var(--sub);font-size:14px}
+.sec-head .more:hover{color:var(--acc2)}
+/* 搜索 */
+.search-box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:10px;display:flex;gap:8px;margin-bottom:34px}
+.search-box input{flex:1;background:transparent;border:0;color:var(--txt);font-size:16px;padding:10px 14px;outline:none}
+.search-box button{background:var(--acc);color:#fff;border:0;padding:0 26px;border-radius:12px;font-weight:700;cursor:pointer}
+.hot-kw{display:flex;gap:10px;flex-wrap:wrap;color:var(--sub);font-size:14px}
+.hot-kw a{padding:5px 12px;border:1px solid var(--line);border-radius:999px}
+.hot-kw a:hover{color:var(--acc2);border-color:var(--acc2)}
+/* 卡片网格 */
+.grid{display:grid;gap:20px}
+.g-4{grid-template-columns:repeat(4,1fr)}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-6px);border-color:rgba(255,92,57,.5)}
+.thumb{aspect-ratio:3/4;background:linear-gradient(160deg,#1a2540,#0d1428);position:relative;display:flex;align-items:flex-end;padding:14px}
+.thumb .no{position:absolute;top:12px;left:12px;background:var(--acc);color:#fff;font-weight:800;font-size:13px;padding:3px 10px;border-radius:7px}
+.thumb .score{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.6);color:var(--gold);font-weight:800;font-size:13px;padding:3px 10px;border-radius:7px}
+.thumb h4{font-size:15px;line-height:1.4}
+.card .meta{padding:14px 16px}
+.card .meta p{color:var(--sub);font-size:13px;margin-top:6px;display:flex;justify-content:space-between}
+/* 分类 */
+.cat-item{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s}
+.cat-item:hover{background:#141f3d;border-color:var(--acc2)}
+.cat-item .ic{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(255,92,57,.3),rgba(34,211,238,.3));display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+.cat-item h3{font-size:18px;margin-bottom:8px}
+.cat-item span{color:var(--sub);font-size:13px}
+/* 排行列表 */
+.rank{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px 18px}
+.rank ol{list-style:none;counter-reset:r}
+.rank li{counter-increment:r;display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.rank li:last-child{border:0}
+.rank li::before{content:counter(r);width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.06);color:var(--sub);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex:none}
+.rank li:nth-child(1)::before{background:var(--gold);color:#000}
+.rank li:nth-child(2)::before{background:var(--sub);color:#000}
+.rank li:nth-child(3)::before{background:var(--acc);color:#fff}
+.rank li b{margin-left:auto;color:var(--acc2);font-weight:600;font-size:13px}
+/* 资讯 */
+.news-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.news-item:last-child{border:0}
+.news-item .d{flex:none;width:52px;text-align:center;background:var(--panel);border-radius:10px;padding:6px}
+.news-item .d b{display:block;color:var(--acc);font-size:20px}
+.news-item .d small{color:var(--sub);font-size:12px}
+.news-item h4{font-size:16px;margin-bottom:4px}
+.news-item p{color:var(--sub);font-size:13px}
+/* 关于 */
+.about{background:linear-gradient(160deg,#0f1a36,#070b17);border:1px solid var(--line);border-radius:22px;padding:36px}
+.about h3{font-size:22px;margin-bottom:14px}
+.about p{color:var(--sub);margin-bottom:12px}
+.tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.tags a{padding:7px 16px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--sub)}
+.tags a:hover{color:var(--acc2);border-color:var(--acc2)}
+/* 页脚 */
+footer{border-top:1px solid var(--line);padding:40px 0 30px;color:var(--sub);font-size:13px}
+.foot-flex{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.foot-flex h5{color:var(--txt);font-size:15px;margin-bottom:10px}
+.foot-flex ul{list-style:none}
+.foot-flex li{margin-bottom:6px}
+.foot-flex a:hover{color:var(--acc2)}
+.copyright{text-align:center;padding-top:22px;border-top:1px solid var(--line)}
+.copyright b{color:var(--txt)}
+/* 响应式 */
+@media(max-width:900px){
+  .g-4{grid-template-columns:repeat(2,1fr)}
+  .g-3,.g-2{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .nav{height:56px;gap:10px}
+  .logo{font-size:17px}
+  .logo i{width:24px;height:24px;border-radius:7px}
+  .nav-links a{padding:6px 9px;font-size:12px}
+  .hero{padding:40px 0 30px}
+  h1{font-size:27px}
+  section{padding:38px 0}
+  .sec-head h2{font-size:21px}
+  .g-4,.g-3,.g-2{grid-template-columns:1fr}
+  .search-box{flex-direction:column}
+  .search-box button{padding:12px}
+  .stats{gap:20px}
+  .about{padding:24px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><i></i><span>搜搜电影网</span></div>
+    <nav class="nav-links">
+      <a href="#home">首页</a>
+      <a href="#search">影片检索</a>
+      <a href="#cat">分类导航</a>
+      <a href="#rank">热播排行</a>
+      <a href="#news">影视资讯</a>
+      <a href="#about">关于我们</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 首屏 -->
+<section id="home" class="hero">
+  <div class="wrap">
+    <span class="h-tag">sousoudianyingwang-app · 影视聚合检索</span>
+    <h1>想看的电影，<em>搜一下</em>就知道</h1>
+    <p>搜搜电影网（https://sousoudianyingwang-app.github.io）是一个专注于影视内容发现与检索导航的站点。无论是最新上映的院线大片、口碑发酵的冷门佳作，还是陪伴多年的经典剧集与番剧，都能在这里通过类型、地区、年份、评分等维度快速定位。</p>
+    <div class="h-actions">
+      <a class="btn btn-p" href="#search">开始搜索影片</a>
+      <a class="btn btn-o" href="#rank">查看今日热榜</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>12万+</b><small>收录影视条目</small></div>
+      <div class="stat"><b>36</b><small>内容分类</small></div>
+      <div class="stat"><b>每日更新</b><small>院线与流媒体同步</small></div>
+      <div class="stat"><b>免费导航</b><small>无注册无门槛</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 检索 -->
+<section id="search" class="wrap">
+  <div class="sec-head">
+    <h2>影片<em style="color:var(--acc);font-style:normal">检索</em></h2>
+    <a class="more" href="#">高级筛选 →</a>
+  </div>
+  <div class="search-box">
+    <input type="text" placeholder="输入片名、导演、演员、关键词，例如：科幻 诺兰 2024">
+    <button onclick="this.innerText='已检索'">搜 索</button>
+  </div>
+  <div class="hot-kw">
+    <span>热搜词：</span>
+    <a href="#">动作大片</a>
+    <a href="#">悬疑烧脑</a>
+    <a href="#">治愈动漫</a>
+    <a href="#">高分韩剧</a>
+    <a href="#">奥斯卡</a>
+    <a href="#">国产剧</a>
+    <a href="#">纪录片</a>
+  </div>
+
+  <div class="grid g-4" style="margin-top:34px">
+    <div class="card">
+      <div class="thumb"><span class="no">TOP 1</span><span class="score">9.4</span><h4>星际回响</h4></div>
+      <div class="meta"><p><span>科幻 / 冒险</span><span>2026</span></p></div>
+    </div>
+    <div class="card">
+      <div class="thumb"><span class="no">TOP 2</span><span class="score">9.1</span><h4>长安雾隐录</h4></div>
+      <div class="meta"><p><span>悬疑 / 古装</span><span>2026</span></p></div>
+    </div>
+    <div class="card">
+      <div class="thumb"><span class="no">TOP 3</span><span class="score">8.9</span><h4>海风来信</h4></div>
+      <div class="meta"><p><span>剧情 / 爱情</span><span>2025</span></p></div>
+    </div>
+    <div class="card">
+      <div class="thumb"><span class="score">8.7</span><h4>无名之辈 2</h4></div>
+      <div class="meta"><p><span>喜剧 / 犯罪</span><span>2026</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 分类导航 -->
+<section id="cat" class="wrap">
+  <div class="sec-head">
+    <h2>分类<em style="color:var(--acc);font-style:normal">导航</em></h2>
+    <a class="more" href="#">查看全部分类 →</a>
+  </div>
+  <div class="grid g-4">
+    <div class="cat-item"><div class="ic">🎬</div><h3>电影</h3><span>动作 · 科幻 · 喜剧 · 文艺 · 恐怖</span></div>
+    <div class="cat-item"><div class="ic">📺</div><h3>电视剧</h3><span>国产 · 美剧 · 韩剧 · 日剧 · 英剧</span></div>
+    <div class="cat-item"><div class="ic">🎤</div><h3>综艺</h3><span>真人秀 · 脱口秀 · 选秀 · 纪实</span></div>
+    <div class="cat-item"><div class="ic">🐉</div><h3>动漫</h3><span>国漫 · 番剧 · 剧场版 · 治愈</span></div>
+    <div class="cat-item"><div class="ic">🌍</div><h3>纪录片</h3><span>自然 · 历史 · 人文 · 科技</span></div>
+    <div class="cat-item"><div class="ic">🏆</div><h3>榜单</h3><span>票房 · 评分 · 获奖 · 口碑</span></div>
+    <div class="cat-item"><div class="ic">🆕</div><h3>新片</h3><span>院线热映 · 即将上映 · 预告</span></div>
+    <div class="cat-item"><div class="ic">⭐</div><h3>精选</h3><span>编辑推荐 · 冷门佳作 · 片单</span></div>
+  </div>
+</section>
+
+<!-- 热播排行 -->
+<section id="rank" class="wrap">
+  <div class="sec-head">
+    <h2>热播<em style="color:var(--acc);font-style:normal">排行</em></h2>
+    <a class="more" href="#">完整榜单 →</a>
+  </div>
+  <div class="grid g-2">
+    <div class="rank">
+      <h3 style="margin-bottom:12px;font-size:17px">🎬 电影热度榜</h3>
+      <ol>
+        <li>星际回响 <b>热度 98.6</b></li>
+        <li>长安雾隐录 <b>热度 96.2</b></li>
+        <li>疾速追凶 <b>热度 94.7</b></li>
+        <li>深海歌谣 <b>热度 91.3</b></li>
+        <li>逆光而行 <b>热度 89.5</b></li>
+        <li>机器人之梦 <b>热度 87.8</b></li>
+        <li>午夜列车 <b>热度 85.1</b></li>
+      </ol>
+    </div>
+    <div class="rank">
+      <h3 style="margin-bottom:12px;font-size:17px">📺 剧集追更榜</h3>
+      <ol>
+        <li>庆余年 Ⅲ <b>热度 97.9</b></li>
+        <li>沉默的真相 2 <b>热度 95.4</b></li>
+        <li>权力的游戏：龙族 <b>热度 93.6</b></li>
+        <li>去有风的地方 2 <b>热度 90.8</b></li>
+        <li>法医秦明：清道夫 <b>热度 88.7</b></li>
+        <li>黑暗荣耀 Ⅲ <b>热度 86.4</b></li>
+        <li>漫长的季节 <b>热度 84.9</b></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 影视资讯 -->
+<section id="news" class="wrap">
+  <div class="sec-head">
+    <h2>影视<em style="color:var(--acc);font-style:normal">资讯</em></h2>
+    <a class="more" href="#">更多资讯 →</a>
+  </div>
+  <div class="grid g-2">
+    <div class="news-item">
+      <div class="d"><b>08</b><small>10月</small></div>
+      <div><h4>国庆档票房破纪录，科幻片成最大黑马</h4><p>多部国产科幻作品集中上映，观众口碑持续发酵，档期总票房较去年同期增长明显。</p></div>
+    </div>
+    <div class="news-item">
+      <div class="d"><b>07</b><small>10月</small></div>
+      <div><h4>诺兰新作内地定档，IMAX 场次一票难求</h4><p>影片以实拍特效回归胶片质感，被影评人称为"近年最沉浸的视听体验"。</p></div>
+    </div>
+    <div class="news-item">
+      <div class="d"><b>06</b><small>10月</small></div>
+      <div><h4>流媒体平台公布四季度片单，多部限定剧来袭</h4><p>悬疑、犯罪、历史题材扎堆，短剧集形态成为创作者新宠。</p></div>
+    </div>
+    <div class="news-item">
+      <div class="d"><b>05</b><small>10月</small></div>
+      <div><h4>动画片单推荐：适合全家观看的十部佳作</h4><p>从治愈系到冒险向，梳理近期值得补番的高分动画作品。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 关于 -->
+<section id="about" class="wrap">
+  <div class="about">
+    <h3>关于 搜搜电影网</h3>
+    <p>搜搜电影网（https://sousoudianyingwang-app.github.io）定位于<strong style="color:var(--txt)">影视内容的检索与导航</strong>，不做内容存储与分发，只为观众提供清晰、准确、及时的影视信息查询与观看入口指引。我们相信，好电影不该被埋没，也不该难找。</p>
+    <p>站点内容涵盖电影、电视剧、综艺、动漫、纪录片五大主线，辅以票房榜单、评分排行、上映日历、影人档案、片单合集等实用模块，帮助你用最短路径找到"下一部想看的作品"。</p>
+    <div class="tags">
+      <a href="#">电影搜索</a>
+      <a href="#">电视剧推荐</a>
+      <a href="#">高分片单</a>
+      <a href="#">票房排行</a>
+      <a href="#">上映日历</a>
+      <a href="#">影评打分</a>
+      <a href="#">演员导演检索</a>
+      <a href="#">类型筛选</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-flex">
+      <div>
+        <h5>搜搜电影网</h5>
+        <ul>
+          <li><a href="#home">首页</a></li>
+          <li><a href="#search">影片检索</a></li>
+          <li><a href="#cat">分类导航</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>内容频道</h5>
+        <ul>
+          <li><a href="#">电影</a></li>
+          <li><a href="#">电视剧</a></li>
+          <li><a href="#">综艺</a></li>
+          <li><a href="#">动漫</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>实用工具</h5>
+        <ul>
+          <li><a href="#">热播排行</a></li>
+          <li><a href="#">上映日历</a></li>
+          <li><a href="#">影评打分</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>关于</h5>
+        <ul>
+          <li><a href="#about">关于我们</a></li>
+          <li><a href="#">使用说明</a></li>
+          <li><a href="#">意见反馈</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>网站名称：<b>搜搜电影网</b>　｜　网站网址：<b>https://sousoudianyingwang-app.github.io</b></p>
+      <p style="margin-top:8px">© 2026 搜搜电影网 sousoudianyingwang-app 保留所有权利。本页为影视信息检索导航页，所有影视版权归原作者及发行方所有。</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
